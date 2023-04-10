@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.project.apidbtester.testapis.entities.TestCaseDetails;
 import com.project.apidbtester.testapis.repositories.TestCaseDetailsRepository;
+import org.springframework.data.domain.Sort;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -37,7 +38,7 @@ public class TestCasesServiceTest {
         testCaseDetailsList.add(new TestCaseDetails());
         testCaseDetailsList.add(new TestCaseDetails());
 
-        when(testCaseDetailsRepository.findAll()).thenReturn(testCaseDetailsList);
+        when(testCaseDetailsRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))).thenReturn(testCaseDetailsList);
 
         // Act
         List<TestCaseDetails> result = testCasesService.fetchAllTestCases();
